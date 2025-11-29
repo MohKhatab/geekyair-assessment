@@ -13,7 +13,7 @@ export default function BrandNeedCard({ brandNeed }: IProps) {
   return (
     <div
       style={{ backgroundColor: brandNeed.color }}
-      className="p-10 rounded-lg text-center flex flex-col justify-center"
+      className="p-10 rounded-lg text-center flex flex-col justify-center max-w-sm mx-auto"
     >
       <img
         src={brandNeed.imagePath}

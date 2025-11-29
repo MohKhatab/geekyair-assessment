@@ -1,0 +1,14 @@
+.swiper-pagination-bullet {
+  width: 16px;
+  height: 12px;
+  background: #58595d;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--primary); /* your brand color */
+  opacity: 1;
+  width: 24px;
+}

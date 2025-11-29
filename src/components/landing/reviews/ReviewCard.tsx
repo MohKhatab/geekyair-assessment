@@ -13,7 +13,7 @@ interface IProps {
 
 export default function ReviewCard({ review }: IProps) {
   return (
-    <div className="border-2 border-[#2E2F35] rounded-xl p-8">
+    <div className="border-2 border-[#2E2F35] rounded-xl w-xs sm:w-md shrink-0 p-8">
       <div className="flex gap-4 items-center">
         <img
           src={review.avatarUrl}

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
+import { motion, MotionValue, useTransform } from "motion/react";
 
 export type Benefit = {
   title: ReactNode;
@@ -12,14 +13,51 @@ export type Benefit = {
 interface IProps {
   benefit: Benefit;
   className?: string;
+  index: number;
+  scrollYProgress: MotionValue<number>;
+  totalCards: number;
 }
 
-export default function Benefit({ benefit, className }: IProps) {
+export default function Benefit({
+  benefit,
+  className,
+  totalCards,
+  index,
+  scrollYProgress,
+}: IProps) {
+  const stepSize = 1 / totalCards;
+  const start = stepSize * index;
+  const end = stepSize * (index + 1);
+
+  const opacity = useTransform(
+    scrollYProgress,
+    [start - 0.05, start + 0.05, end - 0.05, end + 0.05],
+    [0, 1, 1, 0]
+  );
+
+  const scale = useTransform(
+    scrollYProgress,
+    [start - 0.05, start + 0.1, end - 0.1, end + 0.05],
+    [0.8, 1, 1, 0.8]
+  );
+
   return (
-    <div className={cn("flex flex-col gap-10", className)}>
+    <motion.div
+      style={{
+        opacity,
+        scale,
+        zIndex: index,
+      }}
+      className={cn(
+        "absolute inset-0 flex flex-col gap-6 md:gap-10 justify-center p-6",
+        className
+      )}
+    >
       {benefit.title}
-      <p className="text-xl text-[#58595D]">{benefit.description}</p>
-      <div className="p-8 border-2 border-[#D1C7BE] rounded-xl relative">
+      <p className="text-base sm:text-lg md:text-xl text-[#58595D]">
+        {benefit.description}
+      </p>
+      <div className="p-6 sm:p-8 border-2 border-[#D1C7BE] rounded-xl relative">
         <div className="absolute bottom-full -top-3 bg-[#FDF3EA] px-2">
           <svg
             width="29"
@@ -35,14 +73,18 @@ export default function Benefit({ benefit, className }: IProps) {
           </svg>
         </div>
 
-        <p className="font-medium italic text-[#58595D]">{benefit.quote}</p>
+        <p className="font-medium sm:text-base italic text-[#58595D]">
+          {benefit.quote}
+        </p>
 
         <div className="mt-4 flex justify-between">
-          <p className="text-[#A89B90]">{benefit.quoter}</p>
+          <p className="text-[#A89B90] text-sm sm:text-base">
+            {benefit.quoter}
+          </p>
 
           <img src={benefit.logoPath} />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -3,6 +3,7 @@ import Title, { FancyTitle } from "@/components/common/Title";
 import type { Review } from "../reviews/ReviewCard";
 import ReviewCard from "../reviews/ReviewCard";
 import { Button } from "@/components/ui/button";
+import { InfiniteScroll } from "@/components/common/InfiniteScroll";
 
 const reviews: Review[] = [
   {
@@ -36,15 +37,17 @@ const reviews: Review[] = [
 ];
 export default function ReviewsSection() {
   return (
-    <Section>
+    <Section className="px-0 md:px-0 xl:px-0">
       <Title className="text-center">
         PostPilot is 🔥 for <FancyTitle>DTC</FancyTitle>
       </Title>
 
-      <div className="flex gap-8">
-        {reviews.map((review) => (
-          <ReviewCard key={review.username} review={review} />
-        ))}
+      <div className="flex gap-8 overflow-hidden">
+        <InfiniteScroll>
+          {reviews.map((review) => (
+            <ReviewCard key={review.username} review={review} />
+          ))}
+        </InfiniteScroll>
       </div>
 
       <div className="w-full flex justify-center">

@@ -24,11 +24,11 @@ export default function FastLaunchItem({
   return (
     <AccordionItem value={`${index}`}>
       <AccordionTrigger
-        className={`font-bold text-3xl flex gap-10 items-center ${
+        className={`font-bold text-2xl md:text-3xl flex gap-4 md:gap-10 items-center ${
           isActive ? "opacity-100" : "opacity-50"
         } transition-opacity`}
       >
-        <p className="font-grace text-5xl text-center font-normal w-8 text-[#009387]">
+        <p className="font-grace text-4xl md:text-5xl text-center font-normal w-8 text-[#009387]">
           {String(index + 1).padStart(2, "0")}
         </p>
         <p>{title}</p>
