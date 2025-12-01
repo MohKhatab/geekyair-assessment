@@ -1,4 +1,4 @@
-# GeekyAir Assessment – Landing Page Implementation
+# GeekyAir Assessment
 
 ## Overview
 
