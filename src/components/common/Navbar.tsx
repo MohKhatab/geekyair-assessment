@@ -16,37 +16,38 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { useEffect, useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { useRef, useState } from "react";
 
 export default function Navbar() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isHidden, setIsHidden] = useState(false);
+  const { scrollY } = useScroll();
+  let oldScroll = useRef<number>(0);
 
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
+  useMotionValueEvent(scrollY, "change", (y) => {
+    if (y - oldScroll.current > 0) {
+      setIsHidden(true);
+    } else {
+      setIsHidden(false);
+    }
 
-    const controlNavbar = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-
-      lastScrollY = currentScrollY + 64;
-    };
-
-    window.addEventListener("scroll", controlNavbar);
-
-    return () => window.removeEventListener("scroll", controlNavbar);
-  }, []);
+    oldScroll.current = y;
+  });
 
   return (
     <>
-      <div
-        className={`w-full bg-white flex gap-8 py-4 px-5 sm:px-10 lg:px-20 fixed transition-transform duration-300 z-50 ${
-          isVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+      <motion.div
+        animate={isHidden ? "hidden" : "visible"}
+        transition={{ ease: "easeInOut" }}
+        variants={{
+          hidden: {
+            y: "-100%",
+          },
+          visible: {
+            y: "0%",
+          },
+        }}
+        className={`w-full bg-white flex gap-8 py-4 px-5 sm:px-10 lg:px-20 fixed z-50`}
       >
         <img src="logo.svg" alt="Post Pilot" />
         <NavigationMenu className="ml-auto hidden xl:flex">
@@ -144,7 +145,7 @@ export default function Navbar() {
             </SheetFooter>
           </SheetContent>
         </Sheet>
-      </div>
+      </motion.div>
     </>
   );
 }

@@ -10,7 +10,7 @@ export default function CaseStudySection() {
         <img src="landing/caseStudies/banners/obvi.png" />
       </div>
       <div className="flex flex-col gap-8 lg:gap-12">
-        <Title className="mb-0">
+        <Title className="mb-0 md:mb-0 xl:mb-0">
           How <FancyTitle>Obvi</FancyTitle> Drives
           <br /> Profits with Hands-Off Postcard Campaigns
         </Title>

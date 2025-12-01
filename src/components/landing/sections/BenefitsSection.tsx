@@ -2,14 +2,14 @@ import Section from "@/components/common/Section";
 import Title, { FancyTitle } from "@/components/common/Title";
 import BenefitCard, { type Benefit } from "../benefits/BenefitCard";
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
-import { useScroll } from "motion/react";
 
 const benefits: Benefit[] = [
   {
     title: (
-      <h2 className="text-3xl sm:text-4xl xl:text-5xl font-bold leading-snug">
-        <FancyTitle>Powerful</FancyTitle>
+      <h2 className="text-3xl sm:text-4xl xl:text-5xl font-bold">
+        <FancyTitle className="text-4xl sm:text-5xl xl:text-6xl">
+          Powerful
+        </FancyTitle>
         <br /> acquisition & retention
       </h2>
     ),
@@ -22,8 +22,11 @@ const benefits: Benefit[] = [
   },
   {
     title: (
-      <h2 className="text-3xl sm:text-4xl xl:text-5xl font-bold leading-snug">
-        <FancyTitle>Fight back</FancyTitle> against iOS
+      <h2 className="text-3xl sm:text-4xl xl:text-5xl font-bold">
+        <FancyTitle className="text-4xl sm:text-5xl xl:text-6xl">
+          Fight back
+        </FancyTitle>{" "}
+        against iOS
         <br /> updates, jacked-up CPCs & spam folders
       </h2>
     ),
@@ -36,8 +39,11 @@ const benefits: Benefit[] = [
   },
   {
     title: (
-      <h2 className="text-3xl sm:text-4xl xl:text-5xl font-bold leading-snug">
-        Done for <FancyTitle>you</FancyTitle>
+      <h2 className="text-3xl sm:text-4xl xl:text-5xl font-bold">
+        Done for{" "}
+        <FancyTitle className="text-4xl sm:text-5xl xl:text-6xl">
+          you
+        </FancyTitle>
       </h2>
     ),
     description:
@@ -50,43 +56,26 @@ const benefits: Benefit[] = [
 ];
 
 export default function BenefitsSection() {
-  const containerRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
   return (
-    <Section className="bg-[#FDF3EA] pb-26">
-      <Title className="text-center max-w-3xl mx-auto md:mb-0">
+    <Section className="bg-[#FDF3EA]">
+      <Title className="text-center max-w-3xl mx-auto">
         PostPilot makes it a <FancyTitle>cinch</FancyTitle> to send
         personalized, profit-generating postcards.
       </Title>
 
-      <div ref={containerRef} className="h-[300vh]">
-        <div className="sticky top-20 h-[80vh] flex flex-col gap-y-32">
-          <div className="relative w-full h-full flex items-center justify-center">
-            {benefits.map((benefit, i) => (
-              <BenefitCard
-                key={benefit.quote}
-                className={`lg:w-1/2 ${i % 2 !== 0 && "ml-auto"}`}
-                benefit={benefit}
-                index={i}
-                scrollYProgress={scrollYProgress}
-                totalCards={benefits.length}
-              />
-            ))}
-          </div>
-
-          <Button
-            className="uppercase mt-12 absolute -bottom-8 self-center"
-            size="hero"
-          >
-            TRY IT RISK-FREE
-          </Button>
-        </div>
+      <div className="w-full h-full flex flex-col gap-16 xl:gap-32 mt-12">
+        {benefits.map((benefit, i) => (
+          <BenefitCard
+            key={benefit.quote}
+            className={`lg:w-1/2 ${i % 2 !== 0 && "ml-auto"}`}
+            benefit={benefit}
+          />
+        ))}
       </div>
+
+      <Button className="uppercase mt-12 sm:w-fit w-full" size="hero">
+        TRY IT RISK-FREE
+      </Button>
     </Section>
   );
 }

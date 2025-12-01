@@ -10,9 +10,9 @@ export default function StatsSection() {
         It <FancyTitle>works</FancyTitle> like crazy.
       </Title>
 
-      <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 xl:gap-40 items-center justify-center mt-8">
+      <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 xl:gap-40 items-center justify-center mb-8 mt-16 sm:mb-0">
         <div className="flex flex-col justify-center items-center w-[228px]">
-          <Title className="mb-1">28X</Title>
+          <Title className="md:mb-1 xl:mb-1 mb-1">28X</Title>
           <p className="text-sm text-center text-[#58595D]">
             Higher response rate than email & digital
           </p>
@@ -26,7 +26,7 @@ export default function StatsSection() {
         </div>
 
         <div className="flex flex-col justify-center items-center w-[228px]">
-          <Title className="mb-1">17 Days</Title>
+          <Title className="md:mb-1 xl:mb-1 mb-1">17 Days</Title>
           <p className="text-sm text-center text-[#58595D]">
             Lifespan of a postcard vs. seconds for email or SMS
           </p>

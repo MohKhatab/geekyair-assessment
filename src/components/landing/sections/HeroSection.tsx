@@ -38,7 +38,7 @@ export default function HeroSection() {
       <div className="w-full max-w-2xl mx-auto">
         <img
           src="landing/hero.png"
-          className="mt-12 h-90 md:h-[480px] object-contain w-full lg:h-auto block"
+          className="mt-12 h-90 md:h-[480px] object-contain w-full lg:h-auto"
           alt="hero"
         />
       </div>

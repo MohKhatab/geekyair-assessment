@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { type ReactNode } from "react";
-import { motion, MotionValue, useTransform } from "motion/react";
+import { motion } from "motion/react";
 
 export type Benefit = {
   title: ReactNode;
@@ -13,45 +13,21 @@ export type Benefit = {
 interface IProps {
   benefit: Benefit;
   className?: string;
-  index: number;
-  scrollYProgress: MotionValue<number>;
-  totalCards: number;
 }
 
-export default function Benefit({
-  benefit,
-  className,
-  totalCards,
-  index,
-  scrollYProgress,
-}: IProps) {
-  const stepSize = 1 / totalCards;
-  const start = stepSize * index;
-  const end = stepSize * (index + 1);
-
-  const opacity = useTransform(
-    scrollYProgress,
-    [start - 0.05, start + 0.05, end - 0.05, end + 0.05],
-    [0, 1, 1, 0]
-  );
-
-  const scale = useTransform(
-    scrollYProgress,
-    [start - 0.05, start + 0.1, end - 0.1, end + 0.05],
-    [0.8, 1, 1, 0.8]
-  );
-
+export default function Benefit({ benefit, className }: IProps) {
   return (
     <motion.div
-      style={{
-        opacity,
-        scale,
-        zIndex: index,
+      initial={{
+        opacity: 0,
+        translateY: 64,
       }}
-      className={cn(
-        "absolute inset-0 flex flex-col gap-6 md:gap-10 justify-center p-6",
-        className
-      )}
+      whileInView={{
+        opacity: 1,
+        translateY: 0,
+      }}
+      viewport={{ once: true, margin: "-320px" }}
+      className={cn("flex flex-col gap-6 md:gap-10 justify-center", className)}
     >
       {benefit.title}
       <p className="text-base sm:text-lg md:text-xl text-[#58595D]">
@@ -82,7 +58,7 @@ export default function Benefit({
             {benefit.quoter}
           </p>
 
-          <img src={benefit.logoPath} />
+          <img className="object-contain" src={benefit.logoPath} />
         </div>
       </div>
     </motion.div>
